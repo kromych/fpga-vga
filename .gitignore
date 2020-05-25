@@ -1,0 +1,6 @@
+*.log
+*.bin
+*.asc
+*.json
+*.vcd
+*.vvp
