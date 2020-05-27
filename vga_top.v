@@ -36,6 +36,7 @@ module vga_top_800x600x60_down_4x4(i_clk, o_red, o_green, o_blue, o_vsync, o_hsy
 
     reg [10:0] horz_pos = 0;
     reg [9:0] vert_pos = 0;
+    reg inside_visible_area = 0;
 
     localparam horz_sync_pulse = 128;
     localparam horz_front_porch = 40;
@@ -74,13 +75,24 @@ module vga_top_800x600x60_down_4x4(i_clk, o_red, o_green, o_blue, o_vsync, o_hsy
         begin
             horz_pos <= horz_pos + 1;
         end
-    end
 
-    always @(posedge clk40)
-    begin
-        o_red <= 2'b00;
-        o_green <= 2'b00;
-        o_blue <= 2'b00;
+        inside_visible_area <= (horz_pos >= horz_sync_pulse + horz_front_porch + horz_back_porch - 1) &&
+                               (horz_pos <  horz_max - 1) &&
+                               (vert_pos >= vert_sync_pulse + vert_front_porch + vert_back_porch) && 
+                               (vert_pos < vert_max);
+
+        if (inside_visible_area)
+        begin
+            o_red <= horz_pos & 2;
+            o_green <= (horz_pos>>2) & 2;
+            o_blue <= (horz_pos>>4) & 2;
+        end
+        else
+        begin
+            o_red <= 2'b00;
+            o_green <= 2'b00;
+            o_blue <= 2'b00;            
+        end
     end
 
 endmodule
