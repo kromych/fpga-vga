@@ -36,7 +36,7 @@ module vga_tb();
 
     initial
     begin
-        $dumpfile ("vga.vcd");
+        $dumpfile ("./out/vga.vcd");
         $dumpvars;
     end
 

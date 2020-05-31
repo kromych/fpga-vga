@@ -1,3 +1,6 @@
+MKDIR_P=mkdir -p
+OUT_DIR=./out
+
 # TinyFPGA BX
 
 CHIP=--lp8k
@@ -12,39 +15,41 @@ PCF=vga_tinybx.pcf
 MODULES=vga_top.v pll40.v
 PROJECT=vga
 
-${PROJECT}.bin: ${PROJECT}.asc
-	${PACK} -vvv ${PROJECT}.asc ${PROJECT}.bin 2> pack.log
+.PHONY: all
 
-${PROJECT}.asc: ${PROJECT}.json
-	${PNR} ${CHIP} ${CHIP_PACKAGE} --pcf ${PCF} --json ${PROJECT}.json --asc ${PROJECT}.asc -q -l pnr.log
+all: dirs ${OUT_DIR}/${PROJECT}.bin
 
-${PROJECT}.json: ${MODULES}
-	${YOSYS} -g -p "${SYNTH} -json ${PROJECT}.json" ${MODULES} -q -l synth.log
+.PHONY: dirs
+
+dirs: ${OUT_DIR}
 
 .PHONY: clean
 
 clean:
-	rm -f *.log
-	rm -f *.asc
-	rm -f *.json
-	rm -f *.bin
-	rm -f *.vcd
-	rm -f *.vvp
-
-.PHONY: all
-
-all: ${PROJECT}.bin
+	rm -rf ${OUT_DIR}
 
 .PHONY: wave
 
-wave: ${PROJECT}.vcd
-	gtkwave ${PROJECT}.vcd
-
-${PROJECT}.vcd: ${MODULES} vga_tb.v
-	iverilog vga_tb.v -o ${PROJECT}.vvp
-	vvp -v ${PROJECT}.vvp -fst-space-speed
+wave: dirs ${OUT_DIR}/${PROJECT}.vcd
+	gtkwave ${OUT_DIR}/${PROJECT}.vcd
 
 .PHONY: upload
 
-upload: ${PROJECT}.bin
-	tinyprog -p ${PROJECT}.bin
+upload: ${OUT_DIR}/${PROJECT}.bin
+	tinyprog -p ${OUT_DIR}/${PROJECT}.bin
+
+${OUT_DIR}/${PROJECT}.bin: dirs ${OUT_DIR}/${PROJECT}.asc
+	${PACK} -vvv ${OUT_DIR}/${PROJECT}.asc ${OUT_DIR}/${PROJECT}.bin 2> ${OUT_DIR}/pack.log
+
+${OUT_DIR}/${PROJECT}.asc: dirs ${OUT_DIR}/${PROJECT}.json
+	${PNR} ${CHIP} ${CHIP_PACKAGE} --pcf ${PCF} --json ${OUT_DIR}/${PROJECT}.json --asc ${OUT_DIR}/${PROJECT}.asc -q -l ${OUT_DIR}/pnr.log
+
+${OUT_DIR}/${PROJECT}.json: dirs ${MODULES}
+	${YOSYS} -g -p "${SYNTH} -json ${OUT_DIR}/${PROJECT}.json" ${MODULES} -q -l ${OUT_DIR}/synth.log
+
+${OUT_DIR}/${PROJECT}.vcd: dirs ${MODULES} vga_tb.v
+	iverilog vga_tb.v -o ${OUT_DIR}/${PROJECT}.vvp
+	vvp -v ${OUT_DIR}/${PROJECT}.vvp -fst-space-speed
+
+${OUT_DIR}:
+	${MKDIR_P} ${OUT_DIR}
