@@ -83,9 +83,9 @@ module vga_top_800x600x60_down_4x4(i_clk, o_red, o_green, o_blue, o_vsync, o_hsy
 
         if (inside_visible_area)
         begin
-            o_red <= horz_pos & 2;
-            o_green <= (horz_pos>>2) & 2;
-            o_blue <= (horz_pos>>4) & 2;
+            o_red <= horz_pos[3:2] & vert_pos[3:2];
+            o_green <= horz_pos[6:5];
+            o_blue <= vert_pos[6:5];
         end
         else
         begin
