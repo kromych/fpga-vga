@@ -1,19 +1,22 @@
+# Project files
+
 MKDIR_P=mkdir -p
 OUT_DIR=./out
+MODULES=vga_top.v pll40.v digits10_initial.v digits10_case.v 
+PROJECT=fpga-vga
 
-# TinyFPGA BX
-
-CHIP=--lp8k
-CHIP_PACKAGE=--package cm81
+# Yosys
 
 YOSYS=yosys
 SYNTH=synth_ice40
 PNR=nextpnr-ice40
 PACK=icepack
 
+# TinyFPGA BX
+
+CHIP=--lp8k
+CHIP_PACKAGE=--package cm81
 PCF=vga_tinybx.pcf
-MODULES=vga_top.v pll40.v
-PROJECT=vga
 
 .PHONY: all
 
