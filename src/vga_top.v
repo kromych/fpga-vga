@@ -1,5 +1,21 @@
 `default_nettype none
 
+// Returns (x <= 5)
+function /*automatic*/ leq_5;
+    input [2:0] i_num;
+    begin
+        leq_5 = ~i_num[2]|(~i_num[1]&~i_num[0]);
+    end
+endfunction
+
+// Returns (x <= 4 ? 4 - x : 0)
+function /*automatic*/ [2:0] non_neg_4_minus;
+    input [2:0] i_num;
+    begin
+        non_neg_4_minus = {~i_num[2]&~i_num[1]&~i_num[0], ~i_num[2]&(i_num[1]^i_num[0]), ~i_num[2]&i_num[0]};
+    end
+endfunction
+
 // To fit into 128kbit
 //      1) resolution 800x600,
 //      2) outputtting 4x4 pixels as a whole
@@ -33,6 +49,10 @@ module vga_top_800x600x60_down_4x4(i_clk, o_red, o_green, o_blue, o_vsync, o_hsy
         .locked(clk40_locked));
 
 `endif
+
+    //
+    // Image output
+    //
 
     reg [10:0] horz_pos = 0;
     reg [9:0] vert_pos = 0;
@@ -78,9 +98,16 @@ module vga_top_800x600x60_down_4x4(i_clk, o_red, o_green, o_blue, o_vsync, o_hsy
 
         inside_visible_area <= (horz_pos >= horz_sync_pulse + horz_front_porch + horz_back_porch - 1) &&
                                (horz_pos <  horz_max - 1) &&
-                               (vert_pos >= vert_sync_pulse + vert_front_porch + vert_back_porch) && 
+                               (vert_pos >= vert_sync_pulse + vert_front_porch + vert_back_porch) &&
                                (vert_pos < vert_max);
+    end
+/*
+    //
+    // Pattern
+    //
 
+    always @(posedge clk40)
+    begin
         if (inside_visible_area)
         begin
             o_red <= horz_pos[3:2] & vert_pos[3:2];
@@ -91,7 +118,36 @@ module vga_top_800x600x60_down_4x4(i_clk, o_red, o_green, o_blue, o_vsync, o_hsy
         begin
             o_red <= 2'b00;
             o_green <= 2'b00;
-            o_blue <= 2'b00;            
+            o_blue <= 2'b00;
+        end
+    end
+*/
+    //
+    // Digits
+    //
+
+    wire [3:0] digit = horz_pos[8:5];
+    wire [2:0] scanline_num = vert_pos[4:2];
+    wire [2:0] scanline_pos = non_neg_4_minus(horz_pos[4:2]); // Need to count pixels from the end
+    wire [4:0] scanline_pixels;
+
+    digits10_initial digits10(
+        .i_digit(digit),
+        .i_scanline_num(scanline_num),
+        .o_scanline_pixels(scanline_pixels));
+
+    always @(posedge clk40)
+    begin
+        o_red <= 2'b00;
+        o_blue <= 2'b00;
+
+        if (inside_visible_area)
+        begin
+            o_green <= {leq_5(horz_pos[4:2]) & scanline_pixels[scanline_pos], 1'b1};
+        end
+        else
+        begin
+            o_green <= 2'b00;
         end
     end
 
