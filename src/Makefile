@@ -48,7 +48,7 @@ ${OUT_DIR}/${PROJECT}.asc: dirs ${OUT_DIR}/${PROJECT}.json
 	${PNR} ${CHIP} ${CHIP_PACKAGE} --pcf ${PCF} --json ${OUT_DIR}/${PROJECT}.json --asc ${OUT_DIR}/${PROJECT}.asc -q -l ${OUT_DIR}/pnr.log
 
 ${OUT_DIR}/${PROJECT}.json: dirs ${MODULES}
-	${YOSYS} -g -p "${SYNTH} -json ${OUT_DIR}/${PROJECT}.json" ${MODULES} -q -l ${OUT_DIR}/synth.log
+	${YOSYS} -q -l ${OUT_DIR}/synth.log -g -p "${SYNTH} -json ${OUT_DIR}/${PROJECT}.json" ${MODULES}
 
 ${OUT_DIR}/${PROJECT}.vcd: dirs ${MODULES} vga_tb.v
 	iverilog vga_tb.v -o ${OUT_DIR}/${PROJECT}.vvp
