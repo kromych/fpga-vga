@@ -544,4 +544,48 @@ NoConn ~ 8650 2200
 NoConn ~ 9250 2200
 NoConn ~ 9050 2800
 NoConn ~ 8950 2800
+$Comp
+L Mechanical:MountingHole H4
+U 1 1 5FF3FFBB
+P 9850 850
+F 0 "H4" H 9950 896 50  0000 L CNN
+F 1 "MountingHole" H 9950 805 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_Pad_Via" H 9850 850 50  0001 C CNN
+F 3 "~" H 9850 850 50  0001 C CNN
+	1    9850 850 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H3
+U 1 1 5FF44C99
+P 9600 5150
+F 0 "H3" H 9700 5196 50  0000 L CNN
+F 1 "MountingHole" H 9700 5105 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_Pad_Via" H 9600 5150 50  0001 C CNN
+F 3 "~" H 9600 5150 50  0001 C CNN
+	1    9600 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H2
+U 1 1 5FF4913F
+P 1450 5000
+F 0 "H2" H 1550 5046 50  0000 L CNN
+F 1 "MountingHole" H 1550 4955 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_Pad_Via" H 1450 5000 50  0001 C CNN
+F 3 "~" H 1450 5000 50  0001 C CNN
+	1    1450 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Mechanical:MountingHole H1
+U 1 1 5FF4D013
+P 1350 900
+F 0 "H1" H 1450 946 50  0000 L CNN
+F 1 "MountingHole" H 1450 855 50  0000 L CNN
+F 2 "MountingHole:MountingHole_2.2mm_M2_Pad_Via" H 1350 900 50  0001 C CNN
+F 3 "~" H 1350 900 50  0001 C CNN
+	1    1350 900 
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
