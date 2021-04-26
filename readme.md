@@ -7,3 +7,8 @@ for the details of the DAC implementation (modeled with [Electronic Circuit Simu
 
 Here are the TinyFPGA BX and the 4-bit DAC that on the [the breadboard](./img/bb_fpga.jpg) that are connected to a VGA input.
 KiCAD schematic and the rendered pdf are under the [kicad](./kicad) directory.
+
+## Installing tools
+
+1. Yosys FPGA toolchain: https://github.com/YosysHQ/fpga-toolchain/releases
+2. Tinyprog to program TinyFPGA BX: `pip install tinyprog`
