@@ -2,7 +2,7 @@
 
 MKDIR_P=mkdir -p
 OUT_DIR=./out
-MODULES=vga_top.v pll40.v digits10_initial.v digits10_case.v 
+MODULES=pll40.v digits10_initial.v vga_top.v
 PROJECT=fpga-vga
 
 # Yosys
@@ -16,7 +16,7 @@ PACK=icepack
 
 CHIP=--lp8k
 CHIP_PACKAGE=--package cm81
-PCF=vga_tinybx.pcf
+PCF=./vga_tinybx.pcf
 
 .PHONY: all
 
