@@ -1,21 +1,5 @@
 `default_nettype none
 
-// Returns (x <= 5)
-function /*automatic*/ leq_5;
-    input [2:0] i_num;
-    begin
-        leq_5 = ~i_num[2]|(~i_num[1]&~i_num[0]);
-    end
-endfunction
-
-// Returns (x <= 4 ? 4 - x : 0)
-function /*automatic*/ [2:0] non_neg_4_minus;
-    input [2:0] i_num;
-    begin
-        non_neg_4_minus = {~i_num[2]&~i_num[1]&~i_num[0], ~i_num[2]&(i_num[1]^i_num[0]), ~i_num[2]&i_num[0]};
-    end
-endfunction
-
 // To fit into 128kbit
 //      1) resolution 800x600,
 //      2) outputtting 4x4 pixels as a whole
@@ -35,6 +19,22 @@ module vga_top_800x600x60_down_4x4(i_clk, o_red, o_green, o_blue, o_vsync, o_hsy
 
     wire clk40;
     wire clk40_locked;
+
+    // Returns (x <= 5)
+    function /*automatic*/ leq_5;
+        input [2:0] i_num;
+        begin
+            leq_5 = ~i_num[2]|(~i_num[1]&~i_num[0]);
+        end
+    endfunction
+
+    // Returns (x <= 4 ? 4 - x : 0)
+    function /*automatic*/ [2:0] non_neg_4_minus;
+        input [2:0] i_num;
+        begin
+            non_neg_4_minus = {~i_num[2]&~i_num[1]&~i_num[0], ~i_num[2]&(i_num[1]^i_num[0]), ~i_num[2]&i_num[0]};
+        end
+    endfunction
 
 `ifdef TESTING
 

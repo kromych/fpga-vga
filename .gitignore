@@ -5,3 +5,5 @@
 *.vcd
 *.vvp
 *bak
+a.out
+out
