@@ -6,10 +6,9 @@
 
 `define TESTING
 
-`include "digits10_initial.v"
 `include "vga_top.v"
 
-module vga_tb();
+module tb();
 
     reg clk;
 

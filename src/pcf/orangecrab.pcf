@@ -2,6 +2,16 @@ LOCATE COMP "i_clk" SITE "A9";
 IOBUF PORT "i_clk" IO_TYPE=LVCMOS33;
 FREQUENCY PORT "i_clk" 48.0 MHz;
 
+LOCATE COMP "i_btn" SITE "J17";
+IOBUF PORT "i_btn" IO_TYPE=SSTL135_I;
+
+LOCATE COMP "o_led[0]" SITE "K4";
+IOBUF PORT "o_led[0]" IO_TYPE=LVCMOS33;
+LOCATE COMP "o_led[1]" SITE "M3";
+IOBUF PORT "o_led[1]" IO_TYPE=LVCMOS33;
+LOCATE COMP "o_led[2]" SITE "J3";
+IOBUF PORT "o_led[2]" IO_TYPE=LVCMOS33;
+
 LOCATE COMP "o_vsync" SITE "M18";
 IOBUF PORT "o_vsync" IO_TYPE=LVCMOS33;
 IOBUF PORT "o_vsync" PULLMODE=DOWN;
@@ -9,24 +19,24 @@ LOCATE COMP "o_hsync" SITE "N17";
 IOBUF PORT "o_hsync" IO_TYPE=LVCMOS33;
 IOBUF PORT "o_hsync" PULLMODE=DOWN;
 
-LOCATE COMP "o_blue[1]" SITE "B9";
-IOBUF PORT "o_blue[1]" IO_TYPE=LVCMOS33;
-IOBUF PORT "o_blue[1]" PULLMODE=DOWN;
-LOCATE COMP "o_blue[0]" SITE "C8";
+LOCATE COMP "o_blue[0]" SITE "J2";
 IOBUF PORT "o_blue[0]" IO_TYPE=LVCMOS33;
 IOBUF PORT "o_blue[0]" PULLMODE=DOWN;
-LOCATE COMP "o_green[1]" SITE "B8";
-IOBUF PORT "o_green[1]" IO_TYPE=LVCMOS33;
-IOBUF PORT "o_green[1]" PULLMODE=DOWN;
+LOCATE COMP "o_blue[1]" SITE "H2";
+IOBUF PORT "o_blue[1]" IO_TYPE=LVCMOS33;
+IOBUF PORT "o_blue[1]" PULLMODE=DOWN;
 LOCATE COMP "o_green[0]" SITE "A8";
 IOBUF PORT "o_green[0]" IO_TYPE=LVCMOS33;
 IOBUF PORT "o_green[0]" PULLMODE=DOWN;
-LOCATE COMP "o_red[1]" SITE "H2";
-IOBUF PORT "o_red[1]" IO_TYPE=LVCMOS33;
-IOBUF PORT "o_red[1]" PULLMODE=DOWN;
-LOCATE COMP "o_red[0]" SITE "J2";
+LOCATE COMP "o_green[1]" SITE "B8";
+IOBUF PORT "o_green[1]" IO_TYPE=LVCMOS33;
+IOBUF PORT "o_green[1]" PULLMODE=DOWN;
+LOCATE COMP "o_red[0]" SITE "C8";
 IOBUF PORT "o_red[0]" IO_TYPE=LVCMOS33;
 IOBUF PORT "o_red[0]" PULLMODE=DOWN;
+LOCATE COMP "o_red[1]" SITE "B9";
+IOBUF PORT "o_red[1]" IO_TYPE=LVCMOS33;
+IOBUF PORT "o_red[1]" PULLMODE=DOWN;
 
 # ############################# Micro-USB #################################
 # | RST  | programn    | T15 |             |     |                 |      |
