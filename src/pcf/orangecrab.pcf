@@ -41,7 +41,7 @@ IOBUF PORT "o_red[1]" PULLMODE=DOWN;
 # ############################# Micro-USB #################################
 # | RST  | programn    | T15 |             |     |                 |      |
 # | 3V3  |             |     |             |     |                 |      |
-# | AREF |             |     |             |     |                 |      |     
+# | AREF |             |     |             |     |                 |      |
 # | GND  |             |     |             |     |                 |      |
 # | A0   | gpio_a0     | L4  |             |     |                 | VBAT |
 # | A1   | gpio_a1     | N3  |             |     | enable          | EN   |
@@ -314,7 +314,15 @@ IOBUF PORT "o_red[1]" PULLMODE=DOWN;
 #LOCATE COMP "usb_pullup" SITE "N2";
 #IOBUF PORT "usb_pullup" IO_TYPE=LVCMOS33;
 
-# Lattice ECP5-25F FPGA in csfBGA285 package
+# https://github.com/orangecrab-fpga/orangecrab-hardware/blob/main/documentation/datasheet/datasheet-r0.2.pdf
+##########################################################################
+# Part Number        | Configuration | FPGA              | Memory
+# -------------------|---------------|-------------------|---------------
+# OrangeCrab-r0d2-25 | 25F/128MiB    | LFE5U-25F-8MG285C | MT41K64M16TW
+# OrangeCrab-r0d2-85 | 85F/512MiB    | LFE5U-85F-8MG285C | MT41K256M16TW
+
+##########################################################################
+# Lattice ECP5-25F FPGA in csfBGA285 packagee (-8 Speed Grade)
 #   24 K - Look Up Tables
 #   1008 Kb - Embedded Block RAM
 #   194 Kb - Distributed RAM
@@ -354,3 +362,45 @@ IOBUF PORT "o_red[1]" PULLMODE=DOWN;
 #   Battery voltage sensing
 # Feather Format Board
 #   Dimensions: 22.86mm x 50.8mm (0.9” x 2.0”)
+
+##########################################################################
+# ECP5-85F FPGA In csfBGA285 Package (-8 Speed Grade)
+#   84K LookUp Tables
+#   3744Kb Embedded Block RAM
+#   669Kb Distributed RAM
+#   156 18x18 Multipliers
+#   PLLs: 4
+#   Internal Oscillator
+#   Flexible I/O For DDR3 Memory Support
+# DDR3L Memory
+#   128 Mbytes (1Gbit)
+#   64M x16
+#   1.35V Low Voltage Operation
+# Micro USB Connection
+#   Full-Speed (12Mbit) USB With Direct Connection To The FPGA
+# Non-Volatile Storage
+#   128Mbit QSPI FLASH Memory
+#   Bootloader (First 4Mbits)
+#   User Bitstream
+#   User Storage (Firmware/MSC Backend)
+#   QSPI Compatible
+#   MicroSD Socket
+#   4Bit SD Interface (CK, CMD, DAT0-3)
+# Power Supply
+#   High Efficiency DCDC For Main Supplies
+#   Battery Charger (100mA) With Charge Indicator LED
+#   LiPo Battery Connector (PH Type)
+# 48MHz Onboard Oscillator
+# Standard 0.05" JTAG Connector
+# User I/O
+#   1x Button
+#   1x RGB LED
+#   20x I/O On 0.1" Headers
+# Analog System
+#   Analog Mux
+#   SAR ADC, External RC/Input Comparator Of FPGA
+#   Digital Bypass
+#   Internal Channels For Supply Monitor
+#   Battery Voltage Sensing
+# Feather Format Board
+#   Dimensions: 22.86mm x 50.8mm

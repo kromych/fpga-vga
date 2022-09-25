@@ -3,8 +3,8 @@
 MKDIR_P=mkdir -p
 OUT_DIR=${PWD}/out
 SRC=${PWD}/src
-#MODULES=${SRC}/ecp5-pll40.sv ${SRC}/vga_800x600.sv ${SRC}/top.sv
-MODULES=${SRC}/ecp5-pll25.sv ${SRC}/vga_640x480.sv ${SRC}/top.sv
+MODULES=${SRC}/ecp5-pll40.sv ${SRC}/vga_800x600.sv ${SRC}/top.sv
+#MODULES=${SRC}/ecp5-pll25.sv ${SRC}/vga_640x480.sv ${SRC}/top.sv
 PROJECT=fpga-vga
 
 # Yosys
@@ -14,9 +14,9 @@ SYNTH=synth_ecp5
 PNR=nextpnr-ecp5
 PACK=ecppack
 
-# Board Orange Crab
+# Board Orange Crab 85F
 
-CHIP=--25k
+CHIP=--85k
 CHIP_PACKAGE=--package CSFBGA285
 CONSTRAINTS=--lpf ${SRC}/pcf/orangecrab.pcf
 
